@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <title>Save the Date</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<audio id="bgMusic" src="music.mp3" loop></audio>
+
+<!-- CINEMATIC INTRO -->
+<section id="intro" class="intro show">
+  <div class="intro-text">
+    <h1>Michaela & Patrick</h1>
+    <p>are getting married</p>
+  </div>
+</section>
+
+<!-- MAIN SCROLL SITE -->
+<div id="main" class="hidden">
+
+  <!-- FLOATING PETALS -->
+<div class="petals">
+  <!-- pink petals -->
+  <span class="petal pink"></span>
+  <span class="petal pink"></span>
+  <span class="petal pink"></span>
+
+  <!-- green leaves -->
+  <span class="petal green"></span>
+  <span class="petal green"></span>
+
+  <!-- mixed -->
+  <span class="petal mix"></span>
+  <span class="petal mix"></span>
+</div>
+
+  <!-- HERO -->
+<section class="section hero">
+  <div class="hero-content">
+    <p>Save the Date</p>
+    <h1>Michaela & Patrick</h1>
+    <p>December 20, 2026</p>
+  </div>
+</section>
+
+  <!-- INVITATION TEXT -->
+  <section class="section">
+    <div class="content">
+      <p class="formal">Together with their families</p>
+      <p class="formal">request the honor of your presence</p>
+
+      <h2>Michaela & Patrick</h2>
+
+      <p class="formal">as they unite in marriage</p>
+    </div>
+  </section>
+
+<!-- DETAILS -->
+<section class="section">
+  <div class="content">
+
+    <h2>Wedding Details</h2>
+
+    <p class="subtitle">Ceremony & Reception</p>
+
+    <div class="details-block">
+      <p class="label">CEREMONY</p>
+      <p class="text">Nuestra Señora del Pilar Parish</p>
+      <p class="text">December 20, 2026 • 9:00 AM</p>
+    </div>
+
+    <div class="details-divider"></div>
+
+    <div class="details-block">
+      <p class="label">RECEPTION</p>
+      <p class="text">La Jardin de Libra Events Place & Function Hall</p>
+    </div>
+
+  </div>
+</section>
+
+  <!-- GALLERY -->
+<section class="section">
+  <div class="content">
+
+    <h2>Gallery</h2>
+
+    <div class="carousel" id="carousel">
+
+      <button class="nav left" onclick="prevSlide()">‹</button>
+
+      <div class="carousel-frame">
+        <img id="carouselImage" src="img1.jpg">
+      </div>
+
+      <button class="nav right" onclick="nextSlide()">›</button>
+
+    </div>
+
+    <p class="caption" id="captionText"></p>
+    <div class="content">
+<p class="formal invite-caption">
+  In celebration of love and togetherness, we warmly invite you to witness our wedding day and the beginning of our forever.
+</p>
+    </div>
+  </div>
+</section>
+
+<!-- GUEST SEARCH
+ 
+  <section class="section">
+    <div class="content">
+      <h2>Guest Lookup</h2>
+      <input id="searchName" placeholder="Enter your full name">
+      <button onclick="searchGuest()">Search</button>
+      <p id="result"></p>
+    </div>
+  </section>
+
+</div>
+-->
+
+
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background: #FFF8F5;
+  color: #4a4a4a;
+  scroll-behavior: smooth;
+}
+
+/* INTRO */
+.intro {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background: url('cover.jpg') center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  color: white;
+  z-index: 999;
+
+  transition: opacity 1.5s ease;
+}
+
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+.intro-text {
+  position: relative;
+  z-index: 2;
+}
+
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4rem;
+}
+
+/* MAIN */
+.hidden {
+  display: none;
+}
+.section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+
+  background:
+    linear-gradient(rgba(255,248,245,0.9), rgba(255,248,245,0.9)),
+    url('cover.jpg') center/cover no-repeat;
+
+  filter: grayscale(40%);
+}
+
+/* HERO */
+.hero-content p {
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.hero-content h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4rem;
+  margin: 10px 0;
+}
+
+.hero-content p:last-child {
+  font-size: 1.1rem;
+  opacity: 0.85;
+}
+
+/* TEXT */
+h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: #F28CA3;
+}
+
+.formal {
+  letter-spacing: 1px;
+  margin: 5px 0;
+}
+
+/* GALLERY */
+.gallery {
+  display: flex;
+  gap: 15px;
+}
+
+.gallery img {
+  width: 40%;
+  border-radius: 20px;
+}
+
+/* INPUT */
+input {
+  padding: 10px;
+  width: 60%;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(45deg, #7BAE7F, #F28CA3);
+  color: white;
+}
+
+/* PETALS */
+/* 🌸 PETALS CONTAINER */
+.petals {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ❤️ CONTAINER */
+.petals {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ❤️ HEARTS */
+.petals span {
+  position: absolute;
+  top: -10vh;
+
+  width: 14px;
+  height: 14px;
+
+  transform: rotate(45deg);
+  opacity: 0.85;
+
+  animation: fall 10s linear infinite;
+}
+
+/* HEART SHAPE */
+.petals span::before,
+.petals span::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* COLORS */
+.petal.pink,
+.petal.pink::before,
+.petal.pink::after {
+  background: #F28CA3;
+}
+
+.petal.green,
+.petal.green::before,
+.petal.green::after {
+  background: #7BAE7F;
+}
+
+.petal.mix,
+.petal.mix::before,
+.petal.mix::after {
+  background: linear-gradient(45deg, #F28CA3, #7BAE7F);
+}
+
+/* SHAPE POSITION */
+.petals span::before {
+  top: -50%;
+  left: 0;
+}
+
+.petals span::after {
+  left: -50%;
+  top: 0;
+}
+
+/* FALL */
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(45deg);
+  }
+  100% {
+    transform: translateY(110vh) translateX(30px) rotate(405deg);
+  }
+}
+.petals span:nth-child(1){ left: 8%; }
+.petals span:nth-child(2){ left: 22%; }
+.petals span:nth-child(3){ left: 37%; }
+.petals span:nth-child(4){ left: 51%; }
+.petals span:nth-child(5){ left: 68%; }
+.petals span:nth-child(6){ left: 83%; }
+.petals span:nth-child(7){ left: 95%; }
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .gallery {
+    flex-direction: column;
+  }
+  .gallery img {
+    width: 90%;
+  }
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.carousel-frame {
+  width: 320px;
+  height: 420px;
+  overflow: hidden;
+  border-radius: 22px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+/* IMAGE ANIMATION */
+.carousel-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* FADE CLASS (USED IN JS) */
+.fade-out {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+/* NAV BUTTONS */
+.nav {
+  background: rgba(255,255,255,0.6);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #7BAE7F;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  transition: 0.2s ease;
+}
+
+.nav:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.9);
+}
+
+.caption {
+  margin-top: 12px;
+  font-style: italic;
+  color: #F28CA3;
+}
+
+.subtitle {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 25px;
+}
+
+.details-block {
+  margin: 20px 0;
+}
+
+.label {
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #7BAE7F;
+  margin-bottom: 5px;
+}
+
+.text {
+  font-size: 1.1rem;
+  margin: 3px 0;
+}
+
+.details-divider {
+  width: 60px;
+  height: 1px;
+  background: #F28CA3;
+  margin: 20px auto;
+  opacity: 0.6;
+}
+
+/* Wrapper to ensure proper centering within the flex section */
+.invite-caption-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Styling for the invitation caption */
+.invite-caption {
+  max-width: 520px;        /* Controls line length for readability */
+  margin: 20px auto 0;
+  padding: 0 16px;         /* Prevents text from touching screen edges */
+  line-height: 1.7;
+  text-align: center;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 600px) {
+  .invite-caption {
+    max-width: 90%;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+}
