@@ -15,6 +15,7 @@ function startMusic() {
     console.log("Music blocked until user interacts:", err);
   });
 }
+
 document.addEventListener("click", startMusic);
 document.addEventListener("touchstart", startMusic);
 
@@ -22,44 +23,35 @@ document.addEventListener("touchstart", startMusic);
    🎬 CINEMATIC INTRO FLOW
 ========================= */
 window.onload = () => {
-  // Try to play music (browser may block until interaction)
   music.volume = 0.6;
   music.play().catch(() => {
     console.log("Autoplay blocked until user interaction");
   });
 
-  // Intro delay
   setTimeout(() => {
-    // Fade out intro
-    if (intro) {
-      intro.classList.add("fade-out");
-    }
+    if (intro) intro.classList.add("fade-out");
 
-    // Switch to main content
     setTimeout(() => {
       if (intro) intro.style.display = "none";
       if (main) main.classList.remove("hidden");
     }, 1500);
-  }, 2000);
+  }, 5000);
 
-  // Initialize carousel and start auto-slide
+  // INIT CAROUSEL
   updateCarousel();
   startAutoSlide();
 };
 
 /* =========================
-   🎵 MUSIC TOGGLE (OPTIONAL DISC)
+   🎵 MUSIC TOGGLE
 ========================= */
 function toggleMusic() {
-  if (music.paused) {
-    music.play();
-  } else {
-    music.pause();
-  }
+  if (music.paused) music.play();
+  else music.pause();
 }
 
 /* =========================
-   🔍 GUEST SEARCH (SMART MATCH)
+   🔍 GUEST SEARCH
 ========================= */
 async function searchGuest() {
   const input = document
@@ -72,11 +64,6 @@ async function searchGuest() {
 
   try {
     const res = await fetch("./guests.json");
-
-    if (!res.ok) {
-      throw new Error("Failed to load guests.json");
-    }
-
     const data = await res.json();
 
     const matches = data.filter(g =>
@@ -96,6 +83,7 @@ async function searchGuest() {
     resultBox.innerText = "Unable to load guest list.";
   }
 }
+
 /* =========================
    🖼️ CAROUSEL DATA
 ========================= */
@@ -121,19 +109,20 @@ const caption = document.getElementById("captionText");
 const carousel = document.getElementById("carousel");
 
 /* =========================
-   🔄 UPDATE IMAGE (CINEMATIC)
+   🔄 UPDATE IMAGE
 ========================= */
 function updateCarousel() {
   if (!imgElement) return;
 
-  // Fade out effect
   imgElement.classList.add("fade-out");
 
   setTimeout(() => {
     imgElement.src = images[currentIndex].src;
+
     if (caption) {
       caption.innerText = images[currentIndex].text || "";
     }
+
     imgElement.classList.remove("fade-out");
   }, 300);
 }
@@ -141,27 +130,49 @@ function updateCarousel() {
 /* =========================
    ▶️ CONTROLS
 ========================= */
-function nextSlide() {
+function nextSlide(userTriggered = false) {
   currentIndex = (currentIndex + 1) % images.length;
   updateCarousel();
+
+  if (userTriggered) resetAutoSlideTimer();
 }
 
-function prevSlide() {
+function prevSlide(userTriggered = false) {
   currentIndex = (currentIndex - 1 + images.length) % images.length;
   updateCarousel();
+
+  if (userTriggered) resetAutoSlideTimer();
 }
 
 /* =========================
-   ⏱️ AUTO SLIDE (CONTINUOUS)
+   ⏱️ AUTO SLIDE (SMART)
 ========================= */
+let autoSlideInterval;
+let autoSlideTimeout;
+
 function startAutoSlide() {
-  setInterval(() => {
+  stopAutoSlide();
+
+  autoSlideInterval = setInterval(() => {
     nextSlide();
-  }, 4000); // Change slide every 4 seconds
+  }, 4000);
+}
+
+function stopAutoSlide() {
+  clearInterval(autoSlideInterval);
+}
+
+function resetAutoSlideTimer() {
+  stopAutoSlide();
+  clearTimeout(autoSlideTimeout);
+
+  autoSlideTimeout = setTimeout(() => {
+    startAutoSlide();
+  }, 8000);
 }
 
 /* =========================
-   📱 SWIPE SUPPORT (MOBILE)
+   📱 SWIPE SUPPORT
 ========================= */
 let startX = 0;
 
@@ -174,33 +185,24 @@ if (carousel) {
     let endX = e.changedTouches[0].clientX;
 
     if (startX - endX > 50) {
-      nextSlide(); // Swipe left
+      nextSlide(true); // 👈 user interaction
     } else if (endX - startX > 50) {
-      prevSlide(); // Swipe right
+      prevSlide(true); // 👈 user interaction
     }
   });
 }
 
 /* =========================
-   INIT
-========================= */
-window.addEventListener("load", () => {
-  updateCarousel();   // Show first image and caption
-  startAutoSlide();   // Start continuous auto sliding
-});
-
-
-/* =========================
-   🌸 RANDOMIZE PETAL SIZES & SPEED
+   🌸 PETALS RANDOMIZER
 ========================= */
 const petals = document.querySelectorAll(".petals span");
 
 petals.forEach(petal => {
-  const size = Math.random() * 10 + 8; // 8px - 18px
+  const size = Math.random() * 10 + 8;
   petal.style.width = size + "px";
   petal.style.height = size + "px";
 
-  const duration = Math.random() * 5 + 7; // 7s - 12s
+  const duration = Math.random() * 5 + 7;
   petal.style.animationDuration = duration + "s";
 
   const delay = Math.random() * 5;
